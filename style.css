@@ -1,0 +1,140 @@
+.skill-bar {
+    background-color: #c2c0c0;
+    height: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.skill-bar .bar-level {
+    background-color: #9B4DCA;
+    height: 100%;
+    border-radius: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: width 1s ease-in-out;
+}
+
+.skill-bar .bar-text {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.skill1 .bar-level {
+    width: 90%;
+    background-color: #43cfa7;
+}
+
+.skill2 .bar-level {
+    width: 85%;
+    background-color: #43cfa7;
+}
+
+.skill3 .bar-level {
+    width: 85%;
+    background-color: #43cfa7;
+}
+
+.skill4 .bar-level {
+    width: 90%;
+    background-color: #43cfa7;
+}
+
+.skill-bar:before {
+    content: attr(data-percent) "%";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #9B4DCA;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+
+/* Style Reccomendations */
+.testimonial-container {
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+@media screen and (max-width: 768px) {
+    .testimonial-container {
+        font-size: 14px;
+        line-height: 1.3;
+    }
+}
+
+.w3-card img {
+    margin-left: 20px;
+    margin-right: 10px;
+    margin-top: 20px;
+}
+
+/* Style Reccomendations End */
+
+
+/* Ganti font family dengan font yang Anda sukai */
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+/* Form wrapper */
+#portfolio-contact-form {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+}
+
+/* Label */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Input field */
+input,
+textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: none;
+    background-color: #e6e6e6;
+    border-radius: 5px;
+    box-shadow: inset 0 1px 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* Textarea */
+textarea {
+    height: 150px;
+}
+
+/* Submit button */
+button[type="submit"] {
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    background-color: rgb(54, 184, 154);
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #005c6e;
+}
