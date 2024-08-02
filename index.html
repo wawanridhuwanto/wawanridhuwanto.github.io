@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="https://i.ibb.co/8cRwTwx/Logo.png" type="image/x-icon">
+    <title>Portfolio - Wawan Ridhuwanto</title>
+    <meta name="google-adsense-account" content="ca-pub-2046935567871111">
+    <meta property="og:title" content="Portfolio">
+    <meta property="og:description" content="Welcome my portfolio! I'm Wawan Ridhuwanto, an Account Manager and Business Development Professional with over 5 years of experience in managing client relationships and sales strategies. Here, you'll find details about the projects I've managed, the results achieved, and the skills I possess. If you're interested in further discussion or exploring collaboration opportunities, feel free to connect with me via LinkedIn or through the contact information on this page. Thank you for visiting my portfolio.">
+    <meta property="og:image" content="https://i.ibb.co/8cRwTwx/Logo.png">
+    <meta charset="UTF-8">
+    <meta name="description"
+        content="Portfolio website of Wawan Ridhuwanto, showcasing his projects and skills in web development and design.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="script.js"></script>
+    <style>
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Poppins", sans-serif;
+
+        }
+
+        .w3-row-padding img {
+            margin-bottom: 12px
+        }
+
+        /* Set the width of the sidebar to 120px */
+        .w3-sidebar {
+            width: 120px;
+            background: #222;
+        }
+
+        /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+        #main {
+            margin-left: 120px
+        }
+
+        /* Remove margins from "page content" on small screens */
+        @media only screen and (max-width: 600px) {
+            #main {
+                margin-left: 0
+            }
+        }
+    </style>
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-N7CKMBL');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NDC8Q3NFFN"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NDC8Q3NFFN');
+    </script>
+
+</head>
+
+<body class="w3-white">
+    <!-- Icon Bar (Sidebar - hidden on small screens) -->
+    <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+        <!-- Avatar image in top left corner -->
+        <img src="https://i.ibb.co/8cRwTwx/Logo.png" alt="Logo" style="width:70%; padding: 20px 0;">
+        <a href="#" class="w3-bar-item w3-button w3-padding-large" style="background-color: rgb(54, 184, 154);">
+            <i class="fa fa-home w3-xxlarge"></i>
+            <p>HOME</p>
+        </a>
+        <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-user w3-xxlarge"></i>
+            <p>ABOUT</p>
+        </a>
+        <a href="#gallery" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-eye w3-xxlarge"></i>
+            <p>Gallery</p>
+        </a>
+        <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+            <i class="fa fa-envelope w3-xxlarge"></i>
+            <p>CONTACT</p>
+        </a>
+    </nav>
+
+    <!-- Navbar on small screens (Hidden on medium and large screens) -->
+    <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+        <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+            <a href="#" class="w3-bar-item w3-button" style="width:25% !important">Home</a>
+            <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">About</a>
+            <a href="#gallery" class="w3-bar-item w3-button" style="width:25% !important">Gallery</a>
+            <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">Contact</a>
+        </div>
+    </div>
+
+
+
+    <!-- Page Content -->
+    <div class="w3-padding-large" id="main">
+        <!-- Header/Home -->
+        <header class="w3-container w3-padding-32 w3-center w3-white" id="home" style="padding: 50px;">
+            <h1 class="w3-hide-medium"><span class="w3-hide-small"></span> Wawan Ridhuwanto</h1>
+            <h4>Account Manager & Business Development</h4>
+            <img src="/img/foto.png" alt="profil" class="w3-image" style="border-radius: 50%;"
+                width="400" height="400">
+        </header>
+        <br>
+        <!-- About Section -->
+        <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="about">
+            <h3 class="w3-text-light-dark">About</h3>
+            <hr style="width:200px" class="w3-opacity">
+            <p>Excellent reputation for Business Development with a strong experience in managing sales teams and
+                increasing company revenue. I have a thorough understanding of the business process and am able to
+                identify new business opportunities and develop the right strategies to pursue them.</p>
+            <p>My experience includes:</p>
+            <ul>
+                <li>Leading sales teams and achieving sales targets</li>
+                <li>Planning and executing effective marketing strategies</li>
+                <li>Building and maintaining strong relationships with clients</li>
+                <li>Conducting market analysis and evaluating product/service performance</li>
+                <li>Managing budgets and overseeing financial implementation</li>
+                <li>Leading and directing teams to achieve company goals</li>
+            </ul>
+            <p>I have analytical thinking, good communication skills and the ability to work well under pressure. I am
+                always looking to learn and develop in this field. Motivated to learn, grow, and excel.</p>
+            <!-- About End -->
+
+
+            <!--Skills Bar-->
+            <h3 class="w3-padding-16 w3-text-light-dark">Skills</h3>
+            <div class="skill">
+                <p class="skill-title">Leadership</p>
+                <div class="skill-bar skill1" data-percent="90">
+                    <div class="bar-level"></div>
+                    <div class="bar-text">90%</div>
+                </div>
+            </div>
+            <div class="skill">
+                <p class="skill-title">Communication Skills</p>
+                <div class="skill-bar skill2" data-percent="85">
+                    <div class="bar-level"></div>
+                    <div class="bar-text">85%</div>
+                </div>
+            </div>
+            <div class="skill">
+                <p class="skill-title">Negotiation Skills</p>
+                <div class="skill-bar skill3" data-percent="85">
+                    <div class="bar-level"></div>
+                    <div class="bar-text">85%</div>
+                </div>
+            </div>
+            <div class="skill">
+                <p class="skill-title">Customer Relationship Management</p>
+                <div class="skill-bar skill4" data-percent="90">
+                    <div class="bar-level"></div>
+                    <div class="bar-text">90%</div>
+                </div>
+            </div><br><br><br><br>
+
+            <!-- Testimonials -->
+            <h3 class="w3-padding-16 w3-text-light-dark">Recommendation</h3>
+            <hr style="width:200px" class="w3-opacity">
+            <div class="testimonial-container">
+                <div class="w3-card w3-round w3-white w3-container">
+                    <img src="/img/edwin.jpeg" alt="Edwin" class="w3-left w3-circle w3-margin-right"
+                        style="width:60px">
+                    <h4>Edwin Perdanaputra</h4>
+                    <p>VP - Group Head MSME & Region Business</p>
+                    <p>Relationship: Managed Wawan directly</p>
+                    <hr>
+                    <p>"A good sales lead, passionate in his role and product. Committed in building sales
+                        organization
+                        and growth."</p>
+                </div>
+            </div><br>
+
+            <div class="w3-card w3-round w3-white w3-container">
+                <img src="/img/daniel.jpeg" alt="Daniel" class="w3-left w3-circle w3-margin-right"
+                    style="width:60px">
+                <h4>Daniel Sitohang</h4>
+                <p>Senior Associate at Shopee | Ex. Gojek Indonesia</p>
+                <p>Relationship: Senior to Wawan but didn't manage Wawan directly</p>
+                <hr>
+                <p>"Wawan is a team player, very focus and attentive to his job but he always offering his hands to
+                    help others whenever he saw the opportunity. It is one of his best value as part of the big
+                    team. I'll be happy to have him on my team in any given day."</p>
+            </div><br>
+
+            <div class="w3-card w3-round w3-white w3-container">
+                <img src="/img/ridwan.jpeg" alt="Ridwan" alt="Ridwan.jpg"
+                    class="w3-left w3-circle w3-margin-right" style="width:60px">
+                <h4>Ridwan Darmansyah</h4>
+                <p> VP - National Account at. Lintasarta | Ex. Gojek Indonesia</p>
+                <p>Relationship: Worked with Wawan but on different teams</p>
+                <hr>
+                <p>"Anyone who needs a content operation, development and social media specialist...he’s the right
+                    person."</p>
+            </div><br>
+
+            <div class="w3-card w3-round w3-white w3-container">
+                <img src="/img/doni.jpeg" alt="Doni" class="w3-left w3-circle w3-margin-right"
+                    style="width:60px">
+                <h4>Adoni Warta</h4>
+                <p>Senior Business Development | Ex. Shopee | Gojek Indonesia</p>
+                <p>Relationship: Worked with Wawan on the same team</p>
+                <hr>
+                <p>"Good attitude, team work, good personality, can work under pressure and work hard."</p>
+            </div><br>
+
+            <div class="w3-card w3-round w3-white w3-container">
+                <img src="/img/diaz.jpeg" alt="Diaz" class="w3-left w3-circle w3-margin-right"
+                    style="width:60px">
+                <h4>Randy Rakhmadiaz.</h4>
+                <p>Business development at iSeller Commerce | Ex. Gojek Indonesia.</p>
+                <p>Relationship: Worked with Wawan on the same team</p>
+                <hr>
+                <p>works with dedication and hard worker, enjoy working and can stay focus and attention to detail.
+                </p>
+            </div>
+            <!-- End About Section -->
+        </div>
+
+
+
+        <!-- Footer Section -->
+        <footer class="w3-content w3-padding-64 w3-text-grey w3-small w3-center">
+            <div class="w3-padding-64 w3-content w3-text-grey" id="contact">
+                <h3 class="w3-text-light-dark">Contact Me</h3>
+                <hr style="width:200px" class="w3-opacity">
+                <div>
+                    <!--Contact Form-->
+                    <form id="portfolio-contact-form"
+                        action="https://script.google.com/macros/s/AKfycbzLFbOpI3C8MRxq9xjhxLIIwdLl7j6vv4pOd0p9Q2rrW-v1MpyDnA3tAva8VEN2vsAZ/exec"
+                        method="post">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" required>
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">Message:</label>
+                        <textarea id="message" name="message" required></textarea>
+
+                        <button type="submit">Submit</button>
+                    </form neme="portfolio-contact-form">
+
+                    <script>
+                        function validateForm() {
+                            var name = document.forms["portfolio-contact-form"]["name"].value;
+                            var email = document.forms["portfolio-contact-form"]["email"].value;
+                            var message = document.forms["portfolio-contact-form"]["message"].value;
+                            if (name == "" || email == "" || message == "") {
+                                alert("Please fill out all fields");
+                                return false;
+                            }
+                        }
+
+                        document.querySelector("#portfolio-contact-form").addEventListener("submit", function (
+                            event) {
+                            event.preventDefault();
+                            var form = event.target;
+                            var data = new FormData(form);
+                            fetch(form.action, {
+                                    method: form.method,
+                                    body: data,
+                                    headers: {
+                                        'Accept': 'application/json'
+                                    }
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    console.log(data);
+                                    window.location.href =
+                                        "formsubmit.html"; // redirect to form submit page
+                                })
+                                .catch(error => {
+                                    alert("Oops! Something went wrong.");
+                                });
+
+                            // Send data to Google Sheet
+                            fetch('https://script.google.com/macros/s/AKfycbzLFbOpI3C8MRxq9xjhxLIIwdLl7j6vv4pOd0p9Q2rrW-v1MpyDnA3tAva8VEN2vsAZ/exec', {
+                                    method: 'POST',
+                                    body: data
+                                })
+                                .then(response => {
+                                    console.log('Success!', response);
+                                })
+                                .catch(error => {
+                                    console.error('Error!', error.message);
+                                });
+                        });
+                    </script><br>
+                    <!--Contact Form End-->
+
+                    <!-- Google Tag Manager (noscript) -->
+                    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N7CKMBL" height="0" width="0"
+                            style="display:none;visibility:hidden"></iframe></noscript>
+                    <!-- End Google Tag Manager (noscript) -->
+
+                    <div class="w3-section">
+                        <a href="mailto:wawanridhuwanto@gmail.com" target="_blank"
+                            style="display: inline-block; margin-right: 10px;">
+                            <i class="fa fa-envelope w3-hover-opacity" style="font-size: 2em;"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/wawanridhuwanto" target="_blank"
+                            style="display: inline-block; margin-right: 10px;">
+                            <i class="fa fa-linkedin w3-hover-opacity" style="font-size: 2em;"></i>
+                        </a>
+                    </div><br>
+
+                    <div class="w3-section">
+                        <img src="https://i.ibb.co/8cRwTwx/Logo.png" alt="Logo" style="height: 28px;">
+                        <p class="w3-small" style="display: inline-block; margin-left: 10px;">Copyright©
+                            2023
+                            Wawan
+                            Ridhuwanto. All rights reserved.</p>
+                    </div>
+					
+					<script type="module">
+    import Chatbot from "https://cdn.jsdelivr.net/npm/flowise-embed/dist/web.js"
+    Chatbot.init({
+        chatflowid: "00c0f721-dadc-4a16-ad37-87b59c78df49",
+        apiHost: "http://localhost:3000",
+    })
+</script>
+					
+        </footer>
+ <!-- Pengaturan pemutar musik -->
+        <audio id="audioPlayer" autoplay loop style="display: none;">
+            <source src="/public/Million Dreams.mp3" type="audio/mpeg">
+            <source src="/public/Million Dreams.mp3" type="audio/ogg">
+            <source src="/public/Million Dreams.mp3" type="audio/wav">
+        </audio>
+
+    </div>
+    </div>
+</body>
+</html>
