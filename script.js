@@ -1,17 +1,18 @@
-// Memuat JSON dari berkas Portfolio Chatflow.json
-fetch('Portfolio Chatflow.json')
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
+async function query(data) {
+    const response = await fetch(
+        "http://localhost:3000/api/v1/prediction/00c0f721-dadc-4a16-ad37-87b59c78df49",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         }
-        return response.json();
-    })
-    .then(data => {
-        // Menampilkan data JSON ke elemen dengan ID 'jsonData'
-        const jsonDataElement = document.getElementById('jsonData');
-        jsonDataElement.textContent = JSON.stringify(data, null, 2);
-    })
-    .catch(error => {
-        console.error('Error loading JSON:', error);
-        document.getElementById('jsonData').textContent = 'Failed to load data.';
-    });
+    );
+    const result = await response.json();
+    return result;
+}
+
+query({"question": "Hey, how are you?"}).then((response) => {
+    console.log(response);
+});
