@@ -790,7 +790,7 @@ span {
 
 .testimonials h2 {
   margin-bottom: 5rem;
-  font-size: 5rem;
+  font-size: 6rem;
   text-align: center;
 }
 
@@ -804,9 +804,7 @@ span {
   border-radius: 2rem;
   display: flex;
   flex-direction: column;
-  /* Mengubah flex direction untuk mobile */
   align-items: center;
-  /* Memusatkan konten pada layar kecil */
   box-shadow: 0 0 1rem var(--main-color);
 }
 
@@ -827,7 +825,6 @@ span {
   flex-direction: column;
   row-gap: 30px;
   padding: 20px;
-  /* Tambahkan padding untuk kenyamanan tampilan */
   width: 100%;
 }
 
@@ -894,13 +891,12 @@ span {
 /* Responsive for heading and cards */
 @media screen and (max-width: 1200px) {
   .testimonials h2 {
-    font-size: 4rem;
+    font-size: 8rem;
     margin-bottom: 4rem;
   }
 
   .slide p {
     padding: 0 100px;
-    /* Mengurangi padding pada layar sedang */
   }
 }
 
@@ -923,7 +919,7 @@ span {
 
 @media screen and (max-width: 768px) {
   .testimonials h2 {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 3rem;
   }
 
@@ -948,70 +944,59 @@ span {
 
 @media screen and (max-width: 576px) {
   .testimonials h2 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 2.5rem;
   }
 
   .slide p {
     padding: 0 20px;
-    /* Padding minimum untuk smartphone */
   }
 
   .testimonial {
     padding: 20px 0;
-    /* Padding lebih kecil untuk layar kecil */
     max-width: 90%;
-    /* Mengurangi lebar agar sesuai dengan layar kecil */
   }
 
   .testimonial .image {
     height: 100px;
     width: 100px;
-    /* Gambar lebih kecil untuk smartphone */
   }
 
   .details .name {
     font-size: 18px;
-    /* Ukuran font lebih kecil untuk nama */
   }
 
   .details .job {
     font-size: 12px;
-    /* Ukuran font lebih kecil untuk pekerjaan */
   }
 
   .nav-btn {
     display: none;
-    /* Menghilangkan tombol navigasi di layar kecil */
   }
 }
 
 @media screen and (max-width: 400px) {
   .testimonials h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    font-size: 3rem;
+    margin-bottom: 5rem;
   }
 
   .slide p {
     font-size: 14px;
-    /* Mengurangi ukuran font untuk smartphone kecil */
     padding: 0 10px;
   }
 
   .testimonial .image {
     height: 80px;
     width: 80px;
-    /* Gambar lebih kecil untuk smartphone terkecil */
   }
 
   .details .name {
     font-size: 16px;
-    /* Ukuran font lebih kecil untuk nama */
   }
 
   .details .job {
     font-size: 10px;
-    /* Ukuran font lebih kecil untuk pekerjaan */
   }
 }
 
