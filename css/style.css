@@ -891,7 +891,7 @@ span {
 /* Responsive for heading and cards */
 @media screen and (max-width: 1200px) {
   .testimonials h2 {
-    font-size: 8rem;
+    font-size: 4rem;
     margin-bottom: 4rem;
   }
 
