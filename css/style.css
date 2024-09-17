@@ -715,7 +715,7 @@ span {
 
 .portfolio-container .portfolio-box {
   position: relative;
-  border: 5px solid var(--main-color);
+  border: 3px solid var(--main-color);
   border-radius: 2rem;
   box-shadow: 0 0 1rem var(--bg-color);
   overflow: hidden;
@@ -791,6 +791,7 @@ span {
 .testimonials h2 {
   margin-bottom: 5rem;
   font-size: 5rem;
+  text-align: center;
 }
 
 .testimonial {
@@ -802,7 +803,10 @@ span {
   background: var(--bg-color);
   border-radius: 2rem;
   display: flex;
-  overflow: hidden;
+  flex-direction: column;
+  /* Mengubah flex direction untuk mobile */
+  align-items: center;
+  /* Memusatkan konten pada layar kecil */
   box-shadow: 0 0 1rem var(--main-color);
 }
 
@@ -822,7 +826,8 @@ span {
   justify-content: center;
   flex-direction: column;
   row-gap: 30px;
-  height: 100%;
+  padding: 20px;
+  /* Tambahkan padding untuk kenyamanan tampilan */
   width: 100%;
 }
 
@@ -857,7 +862,7 @@ span {
   color: var(--text-color);
 }
 
-/* swiper button css */
+/* Swiper button css */
 .nav-btn {
   height: 40px;
   width: 40px;
@@ -886,15 +891,130 @@ span {
   box-shadow: 0 0 1.2rem var(--main-color);
 }
 
+/* Responsive for heading and cards */
+@media screen and (max-width: 1200px) {
+  .testimonials h2 {
+    font-size: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .slide p {
+    padding: 0 100px;
+    /* Mengurangi padding pada layar sedang */
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .testimonials h2 {
+    font-size: 3.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .slide p {
+    padding: 0 80px;
+    /* Mengurangi padding pada layar tablet */
+  }
+
+  .testimonial {
+    padding: 40px 0;
+    /* Sesuaikan padding untuk tablet */
+  }
+}
+
 @media screen and (max-width: 768px) {
+  .testimonials h2 {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .slide p {
+    padding: 0 60px;
+    /* Padding lebih kecil untuk layar tablet */
+  }
+
+  .testimonial {
+    padding: 30px 0;
+    /* Sesuaikan padding untuk layar tablet lebih kecil */
+    max-width: 700px;
+    /* Membatasi lebar untuk layar yang lebih kecil */
+  }
+
+  .testimonial .image {
+    height: 120px;
+    /* Mengurangi ukuran gambar */
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .testimonials h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
   .slide p {
     padding: 0 20px;
+    /* Padding minimum untuk smartphone */
+  }
+
+  .testimonial {
+    padding: 20px 0;
+    /* Padding lebih kecil untuk layar kecil */
+    max-width: 90%;
+    /* Mengurangi lebar agar sesuai dengan layar kecil */
+  }
+
+  .testimonial .image {
+    height: 100px;
+    width: 100px;
+    /* Gambar lebih kecil untuk smartphone */
+  }
+
+  .details .name {
+    font-size: 18px;
+    /* Ukuran font lebih kecil untuk nama */
+  }
+
+  .details .job {
+    font-size: 12px;
+    /* Ukuran font lebih kecil untuk pekerjaan */
   }
 
   .nav-btn {
     display: none;
+    /* Menghilangkan tombol navigasi di layar kecil */
   }
 }
+
+@media screen and (max-width: 400px) {
+  .testimonials h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .slide p {
+    font-size: 14px;
+    /* Mengurangi ukuran font untuk smartphone kecil */
+    padding: 0 10px;
+  }
+
+  .testimonial .image {
+    height: 80px;
+    width: 80px;
+    /* Gambar lebih kecil untuk smartphone terkecil */
+  }
+
+  .details .name {
+    font-size: 16px;
+    /* Ukuran font lebih kecil untuk nama */
+  }
+
+  .details .job {
+    font-size: 10px;
+    /* Ukuran font lebih kecil untuk pekerjaan */
+  }
+}
+
 
 /* Contact Form Styles */
 .contact {
