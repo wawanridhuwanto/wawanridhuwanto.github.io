@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="icon" href="assets/img/logo.png" type="image/x-icon" />
+  <title>Submission Form</title>
+  <link rel="stylesheet" type="text/css" href="./css/submission.css" />
+  <script src="script.js"></script>
+  <style>
+    /* CSS yang telah diperbarui seperti di atas */
+  </style>
+</head>
+
+<body>
+  <!-- Ikon centang menggunakan SVG -->
+  <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+    <path d="M14 27l7 7 16-16"></path>
+  </svg>
+  <h1>Thank you!</h1>
+  <p class="submit-success">Your submission has been sent. I will get back to you soon.</p>
+  <button onclick="redirectToHomePage()">Close</button>
+
+  <script>
+    function redirectToHomePage() {
+      window.location.href = 'index.html';
+    }
+
+    const successMessage = document.querySelector('.submit-success');
+    const checkmark = document.querySelector('.checkmark');
+
+    // Menambahkan animasi ketika halaman dimuat
+    if (successMessage) {
+      successMessage.classList.add('submit-success');
+
+      // Tampilkan ikon centang dengan animasi seperti dilukis
+      setTimeout(() => {
+        checkmark.classList.add('animate');
+      }, 500); // Tunda sedikit agar muncul setelah pesan
+    }
+  </script>
+</body>
+
+</html>

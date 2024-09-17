@@ -1,0 +1,188 @@
+/* Variabel warna */
+:root {
+    --main-color: #36b89a;
+    /* Warna utama */
+    --hover-color: #078f7f;
+    /* Warna saat hover */
+    --neon-box-shadow: #36b89a;
+    /* Bayangan neon dengan warna utama */
+}
+
+/* Latar belakang warna #081722 */
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #081722;
+    color: white;
+}
+
+h1,
+p {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fade-in-up 1s ease-out forwards;
+}
+
+h1 {
+    font-size: 28px;
+    margin-bottom: 0px;
+    animation-delay: 0.5s;
+}
+
+p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    animation: zoom-in 1s ease-out forwards;
+    /* Tambahkan animasi zoom-in */
+    animation-delay: 1s;
+}
+
+@keyframes fade-in-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoom-in {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Tombol modern dengan gradien */
+button {
+    padding: 15px 30px;
+    border: none;
+    background: linear-gradient(135deg, var(--main-color), #006d5b);
+    color: #fff;
+    font-size: 18px;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.9);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: button-appear 0.7s ease-out forwards;
+    animation-delay: 1.5s;
+    transition: all 0.3s ease;
+}
+
+@keyframes button-appear {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+}
+
+button::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.6s ease;
+    transform: translate(-50%, -50%) scale(0);
+    border-radius: 50%;
+}
+
+button:active::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0;
+}
+
+button:hover {
+    background: linear-gradient(135deg, var(--hover-color), #005a49);
+    box-shadow: 0 10px 30px var(--neon-box-shadow);
+    transform: scale(1.05) rotate(2deg);
+    /* Tambahkan rotasi ringan dan skala */
+    /* Efek zoom saat hover */
+}
+
+button:active {
+    animation: button-click 0.3s ease;
+    transform: scale(0.98) rotate(-1deg);
+    /* Tambahkan rotasi saat diklik */
+}
+
+@keyframes button-click {
+    0% {
+        transform: scale(1) translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: scale(0.95) translateY(4px) rotate(2deg);
+        /* Bergerak ke bawah dan rotasi saat klik */
+    }
+
+    100% {
+        transform: scale(1) translateY(0) rotate(0deg);
+    }
+}
+
+.checkmark {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 20px;
+    stroke: #36b89a;
+    stroke-width: 5;
+    fill: none;
+    stroke-linecap: round;
+    display: none;
+}
+
+.checkmark.animate {
+    display: block;
+    animation: draw-check 2s ease forwards;
+}
+
+@keyframes draw-check {
+    0% {
+        stroke-dasharray: 50;
+        stroke-dashoffset: 50;
+    }
+
+    100% {
+        stroke-dasharray: 50;
+        stroke-dashoffset: 0;
+    }
+}
+
+/* Responsivitas */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 22px;
+    }
+
+    p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    button {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
