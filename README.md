@@ -20,5 +20,4 @@ Any policy violation will be pursued under applicable laws and may result in leg
 ## How to Contribute
 If you are interested in contributing to this project, please submit a pull request. All valid contributions will be reviewed and, if approved, integrated into the project. Please ensure that any contributions are **original** and **do not infringe on any copyrights**.
 
-
 **Thank you** for your cooperation in maintaining the integrity and originality of this project.
