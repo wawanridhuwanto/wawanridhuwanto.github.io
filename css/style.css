@@ -71,7 +71,7 @@ html {
 
 /* Scrollbar Style */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -80,15 +80,14 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--portfolio-bg);
+  background-color: var(--main-color);
   border-radius: 10px;
   box-shadow: 0 0 5px var(--thumb-shadow), 0 0 10px var(--neon-box-shadow);
-  transition: background-color 0.5s ease, transform 0.5s ease;
+  transition: background-color 0.7s ease, transform 0.7s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background-color: var(--hover-color);
-  /* Warna thumb saat hover */
   transform: scale(1.1);
 }
 

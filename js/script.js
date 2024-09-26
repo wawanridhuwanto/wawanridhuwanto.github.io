@@ -327,7 +327,6 @@ document.querySelector('header nav a[href*="skills"]').addEventListener('click',
     }, 500);
 });
 
-
 /* ==================== Testimonials ==================== */
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 1,
