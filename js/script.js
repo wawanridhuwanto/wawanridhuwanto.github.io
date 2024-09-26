@@ -4,7 +4,7 @@ let Navbar = document.querySelector('.navbar');
 
 if (menuIcon && Navbar) {
     menuIcon.onclick = (event) => {
-        event.stopPropagation();
+        event.stopPropagation(); // Prevent click event from bubbling up
         menuIcon.classList.toggle('bx-x');
         Navbar.classList.toggle('active');
         console.log('Toggle triggered');
@@ -21,15 +21,15 @@ if (menuIcon && Navbar) {
     console.error('Menu icon or navbar not found');
 }
 
-
 /* ==================== Scroll Section Active Link ==================== */
 let sections = document.querySelectorAll('section');
 let navLinks = document.querySelectorAll('header nav a');
 
-window.onscroll = () => {
+const handleScroll = () => {
+    // Highlight active link
     sections.forEach((sec) => {
         let top = window.scrollY;
-        let offset = sec.offsetTop - 150;
+        let offset = sec.offsetTop - 150; // Adjust offset as needed
         let height = sec.offsetHeight;
         let id = sec.getAttribute('id');
 
@@ -41,14 +41,36 @@ window.onscroll = () => {
         }
     });
 
-    /* Sticky Navbar */
+    // Sticky Navbar
     let header = document.querySelector('header');
     header.classList.toggle('sticky', window.scrollY > 100);
 
-    /* Reset Menu Icon */
-    menuIcon.classList.remove('bx-x');
-    Navbar.classList.remove('active');
+    // Reset Menu Icon if Navbar is active
+    if (Navbar.classList.contains('active')) {
+        menuIcon.classList.remove('bx-x');
+        Navbar.classList.remove('active');
+    }
+
+    // Back to Top Button Visibility
+    if (window.scrollY > 200) {
+        backToTopBtn.classList.add("active");
+    } else {
+        backToTopBtn.classList.remove("active");
+    }
 };
+
+window.addEventListener('scroll', handleScroll);
+
+/* ==================== Smooth Scroll to Top ==================== */
+const backToTopBtn = document.querySelector("[data-back-top-btn]");
+
+backToTopBtn.addEventListener("click", (event) => {
+    event.stopPropagation(); // Prevent click event from bubbling to document
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth" // Smooth scrolling effect
+    });
+});
 
 /* ==================== Scroll Reveal ==================== */
 ScrollReveal({
@@ -119,8 +141,6 @@ ScrollReveal().reveal('.contact form', {
     delay: 300,
     reset: true
 });
-
-
 
 /* ==================== Typed JS ==================== */
 const typed = new Typed('.multiple-text', {
