@@ -71,23 +71,23 @@ html {
 
 /* Scrollbar Style */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background-color: var(--second-bg-color);
-  border-radius: 10px;
+  background-color: var(--bg-color);
+  border-radius: 8px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--main-color);
+  background-color: var(--portfolio-bg);
   border-radius: 10px;
   box-shadow: 0 0 5px var(--thumb-shadow), 0 0 10px var(--neon-box-shadow);
   transition: background-color 0.7s ease, transform 0.7s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--hover-color);
+  background-color: var(--portfolio-bg);
   transform: scale(1.1);
 }
 
