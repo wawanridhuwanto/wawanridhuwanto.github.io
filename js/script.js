@@ -345,3 +345,12 @@ var swiper = new Swiper(".mySwiper", {
         disableOnInteraction: false,
     },
 });
+
+// // Whatsapp Floating
+// document.getElementById('whatsappButton').addEventListener('click', function (event) {
+//     event.preventDefault();
+//     var phoneNumber = '6281234567890';
+//     var message = 'Halo, saya ingin bertanya tentang produk Anda!';
+//     var whatsappURL = 'https://wa.me/' + phoneNumber + '?text=' + encodeURIComponent(message);
+//     window.open(whatsappURL, '_blank');
+// });
