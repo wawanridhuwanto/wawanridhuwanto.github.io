@@ -1459,7 +1459,7 @@ form button:hover {
   }
 }
 
-/* Whatsapp Floating Button */
+/* Whatsapp Floating Button
 .whatsapp-float {
   position: fixed;
   bottom: 20px;
@@ -1478,4 +1478,4 @@ form button:hover {
 
 .whatsapp-icon:hover {
   transform: scale(1.1);
-}
+} */
