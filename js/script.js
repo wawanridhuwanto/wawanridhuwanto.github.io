@@ -144,7 +144,7 @@ ScrollReveal().reveal('.contact form', {
 
 /* ==================== Typed JS ==================== */
 const typed = new Typed('.multiple-text', {
-    strings: ['Business Development', 'Key Account Manager', 'Frontend Developer'],
+    strings: ['Driving SMEs Growth Through Digital Solutions'],
     typeSpeed: 100,
     backSpeed: 100,
     backDelay: 1000,
