@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Chatbot</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styling untuk font dasar */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Kontainer utama untuk widget chat */
+        #chat-widget-container {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+        }
+        /* Gelembung chat yang bisa diklik */
+        #chat-bubble {
+            width: 4rem;
+            height: 4rem;
+            border-radius: 50%;
+            background-color: #14b8a6; 
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.4), 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+        #chat-bubble:hover {
+            background-color: #0d9488;
+            animation-play-state: paused;
+            transform: scale(1.1);
+        }
+        /* Jendela chat */
+        #chat-window {
+            display: none; /* Awalnya tersembunyi */
+            width: 24rem;
+            max-width: 90vw;
+            height: 70vh;
+            max-height: 40rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            background-color: #1f2937;
+            color: #e5e7eb;
+            flex-direction: column;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        /* Area pesan chat */
+        #chat-messages {
+            scroll-behavior: smooth;
+        }
+        #chat-messages::-webkit-scrollbar {
+            width: 8px;
+        }
+        #chat-messages::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #chat-messages::-webkit-scrollbar-thumb {
+            background-color: #475569;
+            border-radius: 10px;
+            border: 2px solid #1f2937;
+        }
+        #chat-messages::-webkit-scrollbar-thumb:hover {
+            background-color: #64748b;
+        }
+        /* Styling untuk setiap pesan */
+        .chat-message {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            max-width: 85%;
+            word-wrap: break-word;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        .user-message {
+            background-color: #0f766e; 
+            color: white;
+            align-self: flex-end;
+        }
+        .bot-message {
+            background-color: #334155; 
+            color: #f1f5f9;
+            align-self: flex-start;
+        }
+        .bot-message a {
+            color: #5eead4;
+            text-decoration: underline;
+        }
+        .bot-message a:hover {
+            color: #2dd4bf;
+        }
+        /* Kontainer tombol menu */
+        .menu-button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            width: 100%;
+        }
+        /* Tombol menu */
+        .menu-button {
+            background-color: transparent;
+            color: #14b8a6;
+            border: 1px solid #14b8a6;
+            padding: 0.6rem 1rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            width: 80%;
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+            animation: fadeIn 0.5s ease-in-out forwards;
+            opacity: 0;
+            will-change: transform;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .menu-button:nth-child(1) { animation-delay: 0.1s; }
+        .menu-button:nth-child(2) { animation-delay: 0.2s; }
+        .menu-button:nth-child(3) { animation-delay: 0.3s; }
+        .menu-button:nth-child(4) { animation-delay: 0.4s; }
+        .menu-button:nth-child(5) { animation-delay: 0.5s; }
+
+
+        .menu-button:hover {
+            background-color: #14b8a6;
+            color: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.25);
+        }
+        .menu-button:active {
+            transform: scale(0.95) translateY(-1px);
+        }
+        .menu-button svg {
+            margin-right: 0.5rem;
+            transition: stroke 0.3s ease;
+        }
+        /* Indikator loading */
+        .loader {
+            border: 4px solid #475569;
+            border-top: 4px solid #14b8a6;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            align-self: flex-start;
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        /* Animasi */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 20px rgba(20, 184, 166, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 30px rgba(20, 184, 166, 0.6); }
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Konten halaman utama bisa diletakkan di sini -->
+    <!-- Chatbot akan muncul di atas konten ini -->
+
+    <!-- Data tersembunyi untuk konteks chatbot -->
+    <div id="about-me" class="hidden">
+        Wawan Ridhuwanto, Sales B2B | Account Team Leader.
+        Summary: With over 11+ years of experience as a Sales B2B & Account Team Leader in the financial and tech startup industries, Specialize in acquiring SME merchants, sales strategies, and digital platform optimization. Experienced in leading teams and executing strategic initiatives that drive user growth, merchant loyalty, and increase revenue.
+        Work Experience:
+        - Regional Merchant Growth | PADI UMKM (Telkom Indonesia): Increased merchant activation, focused on acquisition, and provided mentorship.
+        - Account Team Lead | Youtap Indonesia: Managed team performance, developed acquisition strategies, and built merchant relationships.
+        - District Mechant Engagement Supervisor | PT. Gojek Indonesia: Led a team to acquire and manage GoFood merchants and increased active merchants.
+        Skills: Sales B2B & Business Development, Key Account Acquisition & Retention, Revenue & GMV Growth, Communication & Negotiation Skills, Account Management & Problem-Solving, Team Leadership, Content optimization, CMS Management, CRM & Sales Tools (Salesforce, Zendesk), Microsoft Office (Excel, Powerpoint), Google Workspace.
+        Languages: Indonesia (Native), English (Intermediate).
+    </div>
+
+    <!-- HTML untuk Chatbot -->
+    <div id="chat-widget-container">
+        <div id="chat-window">
+            <div class="bg-slate-800 text-white p-4 flex justify-between items-center flex-shrink-0">
+                <h3 class="text-lg font-semibold">Chat with me</h3>
+                <button id="close-chat" class="text-gray-300 hover:text-white text-2xl leading-none">&times;</button>
+            </div>
+            <div id="chat-messages" class="flex-1 p-4 overflow-y-auto flex flex-col"></div>
+            <div class="p-4 bg-slate-800">
+                <div class="flex space-x-2">
+                    <input type="text" id="chat-input" placeholder="Ketik pertanyaan atau pilih menu..." class="flex-1 p-2 bg-slate-700 text-gray-200 border border-slate-600 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500">
+                    <button id="send-btn" class="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition-colors">Send</button>
+                </div>
+            </div>
+        </div>
+        <div id="chat-bubble">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg>
+        </div>
+    </div>
+    
+    <!-- JavaScript untuk fungsionalitas Chatbot -->
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        // Mengambil elemen-elemen DOM
+        const chatBubble = document.getElementById('chat-bubble');
+        const chatWindow = document.getElementById('chat-window');
+        const closeChat = document.getElementById('close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+        const aboutMeContent = document.getElementById('about-me').innerText;
+
+        let conversationHistory = [];
+        let followUpMenuDisplayed = false;
+
+        // Data untuk chatbot
+        const workExperience = [
+            { role: 'Regional Merchant Growth', company: 'PADI UMKM (Telkom Indonesia)', startDate: '2022-07-01', endDate: '2024-11-01' },
+            { role: 'Account Team Lead', company: 'Youtap Indonesia', startDate: '2021-08-01', endDate: '2022-05-01' },
+            { role: 'District Mechant Engagement Supervisor', company: 'PT. Gojek Indonesia', startDate: '2017-10-01', endDate: '2020-03-01' },
+            { role: 'Admin Content & Data Collecting Gofood', company: 'PT. Gojek Indonesia', startDate: '2016-09-01', endDate: '2017-09-01' },
+            { role: 'Credit Marketing Officer (4W Leaseback)', company: 'PT. Sinarmas Multifinance', startDate: '2012-01-01', endDate: '2012-10-01' },
+            { role: 'Credit Relation Officer', company: 'PT. Adira Dinamika Multifinance', startDate: '2009-06-01', endDate: '2011-12-01' }
+        ];
+
+        const resumeData = {
+            'tentang saya': `Dengan pengalaman lebih dari 11 tahun sebagai Sales B2B & Account Team Leader di industri keuangan dan startup teknologi. Saya berspesialisasi dalam mengakuisisi merchant UKM, strategi penjualan, dan optimalisasi platform digital. Berpengalaman dalam memimpin tim dan menjalankan inisiatif strategis yang mendorong pertumbuhan pengguna, loyalitas merchant, dan peningkatan pendapatan.`,
+            'pengalaman kerja': `Berikut adalah pengalaman kerja saya:
+- Regional Merchant Growth | PADI UMKM (Juli 2022 - Nov 2024)
+- Account Team Lead | Youtap Indonesia (Ags 2021 - Mei 2022)
+- District Mechant Engagement Supervisor | Gojek (Okt 2017 - Mar 2020)
+- Admin Content & Data Collecting Gofood | Gojek (Sep 2016 - Sep 2017)
+- Credit Marketing Officer | Sinarmas Multifinance (Jan 2012 - Okt 2012)
+- Credit Relation Officer | Adira Dinamika Multifinance (Jun 2009 - Des 2011)`,
+            'skills': `Saya memiliki beberapa keterampilan, antara lain:
+- Sales B2B & Business Development
+- Key Account Acquisition & Retention
+- Revenue & GMV Growth
+- Communication & Negotiation
+- Account Management & Problem-Solving
+- Team Leadership
+- Content optimization & CMS Management
+- CRM & Sales Tools: (Salesforce, Zendesk)
+- Microsoft Office & Google Workspace`,
+        };
+
+        // Event listener untuk interaksi UI
+        chatBubble.addEventListener('click', () => {
+            toggleChatWindow();
+            if (chatWindow.style.display === 'flex' && chatMessages.children.length === 0) {
+                displayMainMenu();
+            }
+        });
+        closeChat.addEventListener('click', toggleChatWindow);
+        sendBtn.addEventListener('click', () => sendMessage());
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+
+        // Fungsi untuk membuka/menutup jendela chat
+        function toggleChatWindow() {
+            if (chatWindow.style.display === 'none' || chatWindow.style.display === '') {
+                chatWindow.style.display = 'flex';
+                chatBubble.style.display = 'none';
+            } else {
+                chatWindow.style.display = 'none';
+                chatBubble.style.display = 'flex';
+            }
+        }
+        
+        // Fungsi untuk mengirim pesan
+        function sendMessage(messageText = null) {
+            const userMessage = messageText || chatInput.value.trim();
+            if (userMessage === '') return;
+            addHumanMessage(userMessage);
+            if (!messageText) chatInput.value = '';
+            fetchBotResponse(userMessage);
+        }
+
+        // Fungsi untuk menambahkan pesan ke UI
+        function addMessageToUI(message, sender, isHtml = false) {
+             const messageElement = document.createElement('div');
+             if (sender !== 'menu') {
+                messageElement.className = `chat-message ${sender}-message`;
+             }
+             if(isHtml) {
+                messageElement.innerHTML = message;
+             } else {
+                messageElement.innerText = message;
+             }
+             chatMessages.appendChild(messageElement);
+             chatMessages.scrollTop = chatMessages.scrollHeight;
+             messageElement.querySelectorAll('.menu-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const messageText = button.getAttribute('data-message');
+                    button.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        // Hapus hanya container tombol yang diklik, bukan semua tombol
+                        const buttonContainer = button.closest('.menu-button-container');
+                        if (buttonContainer) {
+                           buttonContainer.remove();
+                        }
+                        sendMessage(messageText);
+                    }, 200);
+                });
+            });
+        }
+        
+        // Fungsi untuk menampilkan menu utama
+        function displayMainMenu() {
+            addBotMessage("Halo! Saya asisten virtual Wawan. Silakan pilih menu di bawah ini untuk informasi lebih lanjut.", false);
+            const menuHtml = `
+                <div class="menu-button-container">
+                    <button class="menu-button" data-message="Tentang Saya">Tentang Saya</button>
+                    <button class="menu-button" data-message="Skills">Skills</button>
+                    <button class="menu-button" data-message="Pengalaman Kerja">Pengalaman Kerja</button>
+                    <button class="menu-button" data-message="Course & Certification">Course & Certification</button>
+                    <button class="menu-button" data-message="Hubungi Saya">Hubungi Saya</button>
+                </div>
+            `;
+            addMessageToUI(menuHtml, 'menu', true);
+        }
+
+        // Fungsi untuk menampilkan menu tindak lanjut
+        function displayFollowUpMenu() {
+            if (followUpMenuDisplayed) return;
+            const followUpMenuHtml = `
+                    <div class="menu-button-container">
+                        <button class="menu-button" data-message="Kembali ke Menu">
+                            <svg xmlns="http://www.w3.org/2000/svg" style="height: 1rem; width: 1rem;" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                            <span>Kembali ke Menu</span>
+                        </button>
+                    </div>`;
+            addMessageToUI(followUpMenuHtml, 'menu', true);
+            followUpMenuDisplayed = true;
+        }
+
+        // Fungsi untuk menambahkan pesan dari pengguna
+        function addHumanMessage(message) {
+            addMessageToUI(message, 'user');
+            conversationHistory.push({ role: "user", parts: [{ text: message }] });
+        }
+
+        // Fungsi untuk menambahkan pesan dari bot
+        function addBotMessage(message, isFormatted = true, isHtml = false) {
+            hideLoadingIndicator();
+            let finalMessage = message;
+            if (isFormatted && !isHtml) {
+                const closings = ["Terima kasih.", "Semoga informasi ini membantu.", "Jika ada pertanyaan lain, jangan ragu untuk bertanya."];
+                const randomClosing = closings[Math.floor(Math.random() * closings.length)];
+                finalMessage = `Baik, ${message}\n\n${randomClosing}`;
+            }
+            addMessageToUI(finalMessage, 'bot', isHtml);
+            if (!isHtml) {
+                conversationHistory.push({ role: "model", parts: [{ text: finalMessage }] });
+            }
+        }
+        
+        // Fungsi untuk menampilkan indikator loading
+        function showLoadingIndicator() {
+            const loader = document.createElement('div');
+            loader.className = 'loader';
+            chatMessages.appendChild(loader);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Fungsi untuk menyembunyikan indikator loading
+        function hideLoadingIndicator() {
+            const loader = chatMessages.querySelector('.loader');
+            if (loader) loader.remove();
+        }
+
+        // Fungsi untuk menghitung total pengalaman kerja
+        function calculateTotalExperience(experienceArray) {
+            let totalMonths = 0;
+            experienceArray.forEach(job => {
+                const start = new Date(job.startDate);
+                const end = new Date(job.endDate);
+                const months = (end.getFullYear() - start.getFullYear()) * 12 + (end.getMonth() - start.getMonth());
+                totalMonths += months;
+            });
+            const years = Math.floor(totalMonths / 12);
+            const months = totalMonths % 12;
+            return { years, months };
+        }
+
+        // Fungsi untuk memeriksa query privasi
+        function isPrivacyQuery(msg) {
+            const privacyKeywords = ['nomor telpon', 'nomor telepon', 'whatsapp', 'wa', 'email', 'tanggal lahir', 'alamat', 'lahir di', 'tempat tinggal', 'pendidikan', 'sekolah', 'kuliah', 'sma', 'lulusan', 'lulus', 'universitas'];
+            const pattern = new RegExp(`\\b(${privacyKeywords.join('|')})\\b`, 'i');
+            return pattern.test(msg);
+        }
+        
+        // Fungsi untuk mengambil respons dari bot
+        async function fetchBotResponse(userMessage) {
+            const lowerCaseMessage = userMessage.toLowerCase();
+            let botResponse = '';
+
+            const isMenuKeyword = (msg, keywords) => keywords.some(k => msg.toLowerCase().includes(k.toLowerCase()));
+            
+            const mainActions = ['tentang saya', 'pengalaman kerja', 'skills', 'hubungi saya', 'course & certification'];
+            if (isMenuKeyword(userMessage, mainActions) || lowerCaseMessage === 'kembali ke menu') {
+                 followUpMenuDisplayed = false; 
+            }
+
+            // --- PERUBAHAN DI SINI ---
+            if (lowerCaseMessage === 'kembali ke menu') {
+                 // Hapus semua pesan yang ada di dalam kontainer chat
+                 chatMessages.innerHTML = ''; 
+                 // Reset riwayat percakapan
+                 conversationHistory = []; 
+                 // Tampilkan kembali sapaan dan menu utama
+                 displayMainMenu();
+                 return;
+            }
+            // --- AKHIR PERUBAHAN ---
+            
+            if (isPrivacyQuery(lowerCaseMessage)) {
+                addBotMessage("untuk informasi detail mengenai data pribadi, silakan gunakan opsi 'Hubungi Saya' untuk terhubung langsung dengan Wawan.");
+                displayFollowUpMenu();
+                return;
+            }
+
+            const contactQueryKeywords = ['bagaimana cara menghubungi', 'cara kontak', 'kontak wawan'];
+            if(isMenuKeyword(lowerCaseMessage, contactQueryKeywords)){
+                 addBotMessage("Anda dapat terhubung langsung dengan Wawan melalui menu 'Hubungi Saya'. Silakan pilih opsi tersebut untuk diarahkan ke Telegram.");
+                 displayFollowUpMenu();
+                 return;
+            }
+
+            const durationKeywords = ['lama kerja', 'berapa tahun', 'total pengalaman', 'masa kerja'];
+            if (isMenuKeyword(lowerCaseMessage, durationKeywords)) {
+                const { years, months } = calculateTotalExperience(workExperience);
+                botResponse = `berdasarkan rekam jejak profesional, total akumulasi pengalaman kerja Wawan adalah sekitar ${years} tahun ${months} bulan.`;
+            }
+            else if (isMenuKeyword(userMessage, ['Course & Certification', 'sertifikasi'])) {
+                addBotMessage('Anda akan saya arahkan ke halaman kursus dan sertifikasi. Jendela baru akan segera terbuka.', true);
+                window.open('https://lynk.id/wawanridhuwanto', '_blank');
+                displayFollowUpMenu();
+                return;
+            }
+            else if (isMenuKeyword(userMessage, ['Hubungi Saya', 'telegram'])) {
+                const telegramMessage = `Baik, untuk diskusi lebih lanjut, silakan klik tautan di bawah ini untuk terhubung dengan Wawan Ridhuwanto melalui Telegram:<br><br><a href="https://t.me/wawanridhuwanto" target="_blank" rel="noopener noreferrer"><b>Buka Telegram @wawanridhuwanto</b></a>`;
+                addBotMessage(telegramMessage, false, true); // Kirim sebagai HTML
+                conversationHistory.push({ role: "model", parts: [{ text: "Baik, untuk diskusi lebih lanjut, silakan klik tautan di bawah ini untuk terhubung dengan Wawan Ridhuwanto melalui Telegram: https://t.me/wawanridhuwanto" }] });
+                displayFollowUpMenu();
+                return;
+            }
+            else if (isMenuKeyword(userMessage, ['Tentang Saya', 'ringkasan'])) {
+                botResponse = resumeData['tentang saya'];
+            } else if (isMenuKeyword(userMessage, ['Pengalaman Kerja'])) {
+                botResponse = resumeData['pengalaman kerja'];
+            } else if (isMenuKeyword(userMessage, ['Skills'])) {
+                botResponse = resumeData.skills;
+            }
+
+            if (botResponse) {
+                addBotMessage(botResponse);
+                displayFollowUpMenu();
+                return;
+            }
+
+            showLoadingIndicator();
+            // Prompt untuk AI
+            const prompt = `You are a professional assistant for Wawan Ridhuwanto's portfolio. Based *only* on the full context provided below, answer the user's question creatively and professionally in Indonesian. Always start your response with "Baik, " and end with a creative, polite closing like "Terima kasih." or "Semoga informasinya membantu.".
+            Context: "${aboutMeContent}"
+            User's Question: "${userMessage}"`;
+            
+            // Pengaturan untuk API call
+            const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+            const apiKey = ""; // API Key Anda jika diperlukan
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                hideLoadingIndicator();
+                if (result.candidates?.[0]?.content?.parts?.[0]?.text) {
+                    addBotMessage(result.candidates[0].content.parts[0].text, false); 
+                    displayFollowUpMenu();
+                } else {
+                     addBotMessage("maaf, saya tidak dapat menemukan jawaban untuk pertanyaan tersebut. Silakan coba pertanyaan lain atau pilih dari menu.", true);
+                }
+            } catch (error) {
+                console.error("Error fetching bot response:", error);
+                hideLoadingIndicator();
+                addBotMessage("maaf, terjadi kesalahan. Silakan periksa koneksi Anda atau coba lagi nanti.", true);
+            }
+        }
+    });
+    </script>
+</body>
+</html>
